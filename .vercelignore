@@ -1,0 +1,12 @@
+# Dev-only clean-URL router for `php -S` — Vercel uses vercel.json + api/index.php instead
+router.php
+
+# Apache-only rewrite rules — irrelevant on Vercel (which uses vercel.json)
+.htaccess
+
+# Setup artifact, not needed at runtime (import it locally / into your hosted DB directly)
+database.sql
+
+README.md
+.git
+.gitignore

@@ -1,0 +1,33 @@
+# Dhaa Baja — Clean URL rewriting
+# Lets every page be reached without a .php extension, e.g. /library instead
+# of /library.php. Applies site-wide, including the /admin/ subdirectory,
+# since Apache processes this file for every request under the document root.
+
+RewriteEngine On
+RewriteBase /
+
+# 1) Canonicalize: if someone requests a URL that still ends in .php,
+#    send a permanent redirect to the clean (extension-less) version.
+#    This keeps a single canonical URL per page and avoids duplicate-content
+#    issues if old .php links are bookmarked or shared.
+RewriteCond %{THE_REQUEST} \s/+(.+)\.php[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# 2) Internally rewrite clean URLs back to the real .php file on disk,
+#    without changing what's shown in the browser's address bar.
+#    Only applies when the request isn't already an existing file or
+#    directory (so real assets like CSS/JS/images still load normally).
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L,QSA]
+
+# Prevent directory listings
+Options -Indexes
+
+# Block direct access to raw includes and uploaded sheet-music originals
+# from being executed as scripts (defense in depth; PHP files here aren't
+# meant to be hit directly by URL).
+<FilesMatch "\.(sql|log)$">
+    Require all denied
+</FilesMatch>

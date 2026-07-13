@@ -1,0 +1,33 @@
+/* Dhaa Baja — Admin dashboard styles (extracted from inline <style>) */
+
+body {
+    font-family: 'Manrope', sans-serif;
+    background: #fcf9f8;
+}
+
+.font-headline {
+    font-family: 'EB Garamond', serif;
+}
+
+.material-symbols-outlined {
+    vertical-align: middle;
+}
+
+/* Admin login screen */
+.admin-login-card {
+    font-family: 'Manrope', sans-serif;
+}
+
+/* File upload dropzone used on the rhythm form */
+.upload-dropzone {
+    border: 1px dashed #dcc0bc;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.upload-dropzone.drag-over {
+    border-color: #5c0d09;
+    background-color: rgba(92, 13, 9, 0.04);
+}
